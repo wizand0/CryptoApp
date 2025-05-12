@@ -1,4 +1,4 @@
-package ru.wizand.cryptoapp
+package ru.wizand.cryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent
