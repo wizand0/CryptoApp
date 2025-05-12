@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ru.wizand.cryptoapp.CoinDetailActivity"
+            android:name="ru.wizand.cryptoapp.presentation.CoinDetailActivity"
             android:exported="false" />
         <activity
-            android:name="ru.wizand.cryptoapp.CoinPriceListActivity"
+            android:name="ru.wizand.cryptoapp.presentation.CoinPriceListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
