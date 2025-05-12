@@ -1,4 +1,4 @@
-package com.example.cryptoapp.pojo
+package ru.wizand.cryptoapp.pojo
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose

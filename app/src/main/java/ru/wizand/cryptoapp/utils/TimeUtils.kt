@@ -1,4 +1,4 @@
-package com.example.cryptoapp.utils
+package ru.wizand.cryptoapp.utils
 
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
