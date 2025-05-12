@@ -1,4 +1,4 @@
-package com.example.cryptoapp.api
+package ru.wizand.cryptoapp.api
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
