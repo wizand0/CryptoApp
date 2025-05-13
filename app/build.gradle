@@ -7,9 +7,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace = "ru.wizand.cryptoapp"
     compileSdk = 35
     defaultConfig {
-        applicationId = "com.example.cryptoapp"
+        applicationId = "ru.wizand.cryptoapp"
         minSdk = 21
         targetSdk = 35
         versionCode = 1
@@ -29,7 +30,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.example.cryptoapp'
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -45,6 +48,9 @@ dependencies {
 
 
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.9.0"
+
+
+
 
 
     implementation "androidx.room:room-runtime:2.7.1"
