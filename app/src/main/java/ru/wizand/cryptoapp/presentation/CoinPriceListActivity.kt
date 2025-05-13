@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptoapp.R
-import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
+import ru.wizand.cryptoapp.R
+import ru.wizand.cryptoapp.databinding.ActivityCoinPriceListBinding
 import ru.wizand.cryptoapp.domain.CoinInfo
 import ru.wizand.cryptoapp.presentation.adapters.CoinInfoAdapter
 
@@ -23,18 +23,40 @@ class CoinPriceListActivity : AppCompatActivity() {
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinInfo) {
-                val intent = CoinDetailActivity.newIntent(
-                    this@CoinPriceListActivity,
-                    coinPriceInfo.fromSymbol
-                )
-                startActivity(intent)
+                if (isOnePaneMode()) {
+                    launchDetailedActivity(coinPriceInfo.fromSymbol)
+                } else {
+                    launchDetailedFragment(coinPriceInfo.fromSymbol)
+                }
             }
         }
 //        val rvCoinPriceList = findViewById<RecyclerView>(R.id.rvCoinPriceList)
         binding.rvCoinPriceList.adapter = adapter
+
+//        Чтобы убрать анимацию при обновлении нужно раскомментировать эту строку:
+//        binding.rvCoinPriceList.itemAnimator = null
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.coinInfoList.observe(this) {
-            adapter.coinInfoList = it
+            adapter.submitList(it)
         }
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
+    private fun launchDetailedActivity(fromSymbol: String) {
+        val intent = CoinDetailActivity.newIntent(
+            this@CoinPriceListActivity,
+            fromSymbol
+        )
+        startActivity(intent)
+    }
+
+    private fun launchDetailedFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
     }
 }
